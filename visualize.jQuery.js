@@ -33,7 +33,7 @@ $.fn.visualize = function(options, container){
 			barGroupMargin: 10,
 			barMargin: 1, //space around bars in bar chart (added to both sides of bar)
 			yLabelInterval: 30, //distance between y labels,
-            labelFilter: function(label) { return label; }
+			labelFilter: function(label) { return label; }
 		},options);
 		
 		//reset width, height to numbers
