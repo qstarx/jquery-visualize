@@ -163,7 +163,7 @@ $.fn.visualize = function(options, container){
 				},
 				yLabels: function(){
 					var yLabels = [];
-					var chartHeight = o.height;
+					var chartHeight = ('bar' == o.type && 'horizontal' == o.barDirection) ? o.width : o.height;
 					var numLabels = Math.round(chartHeight / 30);
 					//var totalRange = this.topValue() + Math.abs(this.bottomValue());
 					var loopInterval = Math.round(this.totalYRange() / Math.floor(numLabels)); //fix provided from lab
