@@ -32,7 +32,8 @@ $.fn.visualize = function(options, container){
 			dotInnerColor: "#ffffff", // only used for lineDots:'double'
 			barGroupMargin: 10,
 			barMargin: 1, //space around bars in bar chart (added to both sides of bar)
-			yLabelInterval: 30 //distance between y labels
+			yLabelInterval: 30, //distance between y labels,
+			labelFilter: function(label) { return label; }
 		},options);
 		
 		//reset width, height to numbers
@@ -224,7 +225,7 @@ $.fn.visualize = function(options, container){
 			        var percentage = parseFloat((fraction*100).toFixed(2));
 
 			        if(percentage){
-			        	var labelval = (o.pieLabelsAsPercent) ? percentage + '%' : this;
+			        	var labelval = (o.pieLabelsAsPercent) ? percentage + '%' : o.labelFilter(this);
 				        var labeltext = $('<span class="visualize-label">' + labelval +'</span>')
 				        	.css(leftRight, 0)
 				        	.css(topBottom, 0);
@@ -256,7 +257,7 @@ $.fn.visualize = function(options, container){
 					.height(canvas.height())
 					.insertBefore(canvas);
 				$.each(xLabels, function(i){ 
-					var thisLi = $('<li><span>'+this+'</span></li>')
+					var thisLi = $('<li><span>'+o.labelFilter(this)+'</span></li>')
 						.prepend('<span class="line" />')
 						.css('left', xInterval * i)
 						.appendTo(xlabelsUL);						
@@ -278,7 +279,7 @@ $.fn.visualize = function(options, container){
 					.insertBefore(canvas);
 					
 				$.each(yLabels, function(i){  
-					var thisLi = $('<li><span>'+this+'</span></li>')
+					var thisLi = $('<li><span>'+o.labelFilter(this)+'</span></li>')
 						.prepend('<span class="line"  />')
 						.css('bottom',liBottom*i)
 						.prependTo(ylabelsUL);
@@ -382,7 +383,7 @@ $.fn.visualize = function(options, container){
 					.insertBefore(canvas);
 
 				$.each(bottomLabels, function(i){
-					var thisLi = $('<li><span class="label">'+this+'</span></li>')
+					var thisLi = $('<li><span class="label">'+o.labelFilter(this)+'</span></li>')
 						.prepend('<span class="line" />')
 						.css('left', xInterval * i)
 						.width(xInterval)
@@ -407,7 +408,7 @@ $.fn.visualize = function(options, container){
 					.insertBefore(canvas);
 
 				$.each(leftLabels, function(i){
-					var thisLi = $('<li><span>'+this+'</span></li>').prependTo(ylabelsUL);
+					var thisLi = $('<li><span>'+o.labelFilter(this)+'</span></li>').prependTo(ylabelsUL);
 
 					var label = thisLi.find('span:not(.line)').addClass('label');
 
