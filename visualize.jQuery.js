@@ -271,7 +271,7 @@ $.fn.visualize = function(options, container){
 				});
 
 				//write Y labels
-				var yScale = canvas.height() / totalYRange;
+				var yScale = canvas.height() / totalYRange ;
 				var liBottom = canvas.height() / (yLabels.length-1);
 				var ylabelsUL = $('<ul class="visualize-labels-y"></ul>')
 					.width(canvas.width())
@@ -281,7 +281,7 @@ $.fn.visualize = function(options, container){
 				$.each(yLabels, function(i){  
 					var thisLi = $('<li><span>'+o.labelFilter(this)+'</span></li>')
 						.prepend('<span class="line"  />')
-						.css('bottom',yScale*yLabels[i])
+						.css('bottom',(yScale*yLabels[i])-liBottom)
 						.prependTo(ylabelsUL);
 					var label = thisLi.find('span:not(.line)');
 					var topOffset = label.height()/-2;
@@ -452,7 +452,7 @@ $.fn.visualize = function(options, container){
 						}
 					}
 					else {
-						thisLi.css('bottom', yScale*yLabels[i]).prepend('<span class="line" />');
+						thisLi.css('bottom', yScale*yLabels[i]-liBottom).prepend('<span class="line" />');
 						label.css('margin-top', -label.height() / 2)
 					}
 				});
